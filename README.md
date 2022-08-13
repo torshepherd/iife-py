@@ -1,4 +1,6 @@
-# IIFE (immediately-invoked function expressions)
+# iife
+
+## Immediately-invoked function expressions in Python
 
 The `iife` package provides a decorator function `iife` that calls the function/class it decorates and assigns the result to the name of the function/class.
 
@@ -15,9 +17,11 @@ class player:
     x: int = 1
     y: int = 2
 
-# player is an instance of the player class, but the class cannot be reinstantiated because the name is shadowed.
-player(x=3, y=4) # SyntaxError
-player.x # 1
+# player is an instance of the player class
+player.x # -> 1
+
+# The class cannot be reinstantiated because the name is shadowed.
+new_player = player(x=3, y=4) # -> SyntaxError
 ```
 
 This might also be useful in library development to hide the implementation details of the class from the end user, who can only access the single instance.
@@ -46,3 +50,18 @@ def x() -> Optional[int]:
 ```
 
 ... And a bunch more. Maybe. Tbh this is mostly for fun.
+
+## The entire package:
+
+This is the entire package (`iife.py`):
+
+```python
+from typing import Callable, TypeVar
+
+T = TypeVar("T")
+
+def iife(c: Callable[[], T]) -> T:
+    return c()
+```
+
+That's it.
