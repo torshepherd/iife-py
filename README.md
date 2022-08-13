@@ -4,7 +4,22 @@
 
 The `iife` package provides a decorator function `iife` that calls the function/class it decorates and assigns the result to the name of the function/class.
 
-Some use cases include
+## The entire package:
+
+This is the entire package (`iife.py`):
+
+```python
+from typing import Callable, TypeVar
+
+T = TypeVar("T")
+
+def iife(c: Callable[[], T]) -> T:
+    return c()
+```
+
+That's it.
+
+Some use cases include...
 
 ## Creating an anonymous object.
 
@@ -50,18 +65,3 @@ def x() -> Optional[int]:
 ```
 
 ... And a bunch more. Maybe. Tbh this is mostly for fun.
-
-## The entire package:
-
-This is the entire package (`iife.py`):
-
-```python
-from typing import Callable, TypeVar
-
-T = TypeVar("T")
-
-def iife(c: Callable[[], T]) -> T:
-    return c()
-```
-
-That's it.
