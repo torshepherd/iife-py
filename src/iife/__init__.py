@@ -66,12 +66,47 @@ def x() -> Optional[int]:
 
 ... And a bunch more. Maybe. Tbh this is mostly for fun."""
 
-from typing import Callable, TypeVar
-
+from asyncio import iscoroutinefunction
+from typing import Any, Callable, Coroutine, Optional, TypeVar, overload
 
 T = TypeVar("T")
 
 
-def iife(c: Callable[[], T]) -> T:
+@overload
+def iife(c=None, /, **kwargs) -> Callable[[Callable[..., T]], T]:
+    ...
+
+
+@overload
+def iife(c: Callable[[], T], /, **kwargs) -> T:
+    ...
+
+
+# TODO: async functions
+# Should async IIFEs evaluate to the coroutine or run the coroutine and await the result?
+@overload
+def iife(c: Callable[[], Coroutine[Any, Any, T]], /, **kwargs) -> T:
+    ...
+
+
+def iife(
+    c: Optional[Callable[[], T | Coroutine[Any, Any, T]]] = None, /, **kwargs
+) -> T | Callable[[Callable[..., T | Coroutine[Any, Any, T]]], T]:
     """Call the function/class and assign the result to the name of the function/class."""
-    return c()
+    if iscoroutinefunction(c):
+        raise NotImplementedError("iife cannot be used with async functions yet")
+
+    if isinstance(c, Callable) and not kwargs:
+        return c()
+
+    else:
+
+        def inner(c: Callable[..., T | Coroutine[Any, Any, T]]) -> T:
+            if iscoroutinefunction(c):
+                raise NotImplementedError(
+                    "iife cannot be used with async functions yet"
+                )
+            else:
+                return c(**kwargs)  # type: ignore
+
+        return inner
