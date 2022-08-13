@@ -26,6 +26,8 @@ Some use cases include...
 Have you ever written a class that you know will only have one instance? You can use the iife decorator to create that instance immediately.
 
 ```python
+from iife import iife
+
 @iife
 @dataclass
 class player:
@@ -56,6 +58,8 @@ for i in y:
 Why not do it with an IIFE? (To be honest, this isn't the best example, but it's more fun to do it like this.)
 
 ```python
+from iife import iife
+
 @iife
 def x() -> Optional[int]:
     y = [1, 2, 3]
