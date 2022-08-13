@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "invoke-iife"
-version = "0.2.0"
+version = "0.3.0"
 description = "Bringing the fun of immediately-invoked function expressions to Python!"
 authors = ["Tor Shepherd <tor.aksel.shepherd@gmail.com>"]
 license = "MIT"
