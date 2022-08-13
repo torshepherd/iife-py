@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Bringing the fun of immediately-invoked function expressions to Python!"
 authors = ["Tor Shepherd <tor.aksel.shepherd@gmail.com>"]
 license = "MIT"
+readme = "README.md"
 
 documentation = "https://torshepherd.github.io/iife-py"
 homepage = "https://torshepherd.github.io/iife-py"
