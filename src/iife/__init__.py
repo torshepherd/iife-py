@@ -73,11 +73,6 @@ T = TypeVar("T")
 
 
 @overload
-def iife(c=None, /, **kwargs) -> Callable[[Callable[..., T]], T]:
-    ...
-
-
-@overload
 def iife(c: Callable[[], T], /, **kwargs) -> T:
     ...
 
@@ -86,6 +81,11 @@ def iife(c: Callable[[], T], /, **kwargs) -> T:
 # Should async IIFEs evaluate to the coroutine or run the coroutine and await the result?
 @overload
 def iife(c: Callable[[], Coroutine[Any, Any, T]], /, **kwargs) -> T:
+    ...
+
+
+@overload
+def iife(c=None, /, **kwargs) -> Callable[[Callable[..., T]], T]:
     ...
 
 
